@@ -1,0 +1,81 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.5.RELEASE'
+    id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+ext {
+    profile = System.getProperty("env") ?: "dev"
+    println "[current profile]:" + profile
+}
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    providedRuntime
+    all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-log4j2:2.3.5.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.3.5.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.3.5.RELEASE'
+    compile 'org.springframework.boot:spring-boot-devtools:2.1.5.RELEASE'
+    testCompile 'org.springframework.boot:spring-boot-starter-test:2.3.5.RELEASE'
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.75'
+    compileOnly 'org.projectlombok:lombok:1.18.6'
+    annotationProcessor 'org.projectlombok:lombok:1.18.6'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
+    compile group: 'org.apache.commons', name: 'commons-pool2', version: '2.9.0'
+    compile 'jstl:jstl:1.2'
+    compile 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.3.5.RELEASE'
+    compile group: 'com.alibaba.cloud', name: 'spring-cloud-starter-alibaba-nacos-discovery', version: '2.2.3.RELEASE'
+    compile group: 'com.alibaba.cloud', name: 'spring-cloud-starter-alibaba-nacos-config', version: '2.2.3.RELEASE'
+    compile group: 'de.codecentric', name: 'spring-boot-admin-starter-client', version: '2.3.1'
+    compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.6'
+    compile 'com.github.pagehelper:pagehelper-spring-boot-starter:1.2.5'
+    compile group: 'de.codecentric', name: 'spring-boot-admin-starter-client', version: '2.1.5'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '2.1.5.RELEASE'
+    compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
+    compile group: 'org.apache.poi', name: 'poi', version: $/3.17/$
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
+    compile group: 'cn.hutool', name: 'hutool-all', version: '4.2.1'
+    compile group: 'net.sf.json-lib', name: 'json-lib', version: '2.4',classifier:'jdk15'
+    compile group: 'ma.glasnost.orika', name: 'orika-core', version: '1.5.2'
+    compile group: 'io.springfox', name: 'springfox-swagger2', version:'2.9.2'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version:'2.9.2'
+}
+
+group = 'com.example.redisDemo'
+version = '1.0.1'
+description = 'redisDemo'
+
+sourceSets {
+    main {
+        resources {
+            srcDirs = ["src/main/resources", "env/$profile"]
+        }
+    }
+}
+
+bootJar {
+    baseName = 'redisDemo'
+    version = '1.0.1'
+}
+
+jar {
+    enabled = true
+    String someString = ''
+    configurations.runtime.each {someString = someString + " lib//"+it.name}
+    manifest {
+        attributes 'Main-Class': 'com.example.RedisDemoApplication'
+        attributes 'Class-Path': someString
+    }
+}
+
+
+

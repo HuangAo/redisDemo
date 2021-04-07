@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: redisDemo
+  cloud:
+    nacos:
+      server-addr: 192.168.195.101:8848
+      discovery:
+        enabled: true
+        namespace: 0a6d2f86-33b3-4b4d-9aa0-e86c68e4dcbb
+        metadata:
+          management:
+            context-path: ${server.servlet.context-path}/actuator
+      config:
+        enabled: true
+        prefix: redisDemo
+        file-extension: yaml
+        namespace: 0a6d2f86-33b3-4b4d-9aa0-e86c68e4dcbb
+  profiles:
+    active: dev
+
+
+
+
