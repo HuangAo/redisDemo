@@ -83,6 +83,6 @@ public class RedisConfigForRead {
         template.setConnectionFactory(lettuceConnectionFactory);
         template.setDefaultSerializer(new CustomRedisSerializer());
         return template;
-    }
 
+    }
 }

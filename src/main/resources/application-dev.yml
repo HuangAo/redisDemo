@@ -1,0 +1,24 @@
+﻿server:
+  port: 8081
+  servlet:
+    context-path: /redisDemo
+spring:
+  redis:
+    lettuce:
+      pool:
+        max-active: 100
+        max-wait: -1
+        max-idle: 100
+        min-idle: 0
+    read:
+      host: 192.168.195.101
+      port: 6379
+      password: 123456
+      timeout: 2000
+      database: 0
+    write:
+      host: 192.168.195.101
+      port: 6379
+      password: 123456
+      timeout: 2000
+      database: 0

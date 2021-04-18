@@ -273,7 +273,7 @@ public class RedisTool {
 //简单来说，就是在eval命令执行Lua代码的时候，Lua代码将被当成一个命令去执行，并且直到eval命令执行完成，Redis才会执行其他命令。
 ```
 
-
+redlock
 
 # 4.redis最佳实践
 
